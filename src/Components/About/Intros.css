@@ -1,0 +1,113 @@
+/* Container for the whole about section */
+.imgForChurchAboutSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: .5rem .5rem;
+  gap: 2rem;
+}
+
+/* Main church image at the top */
+.TheImgageFortheChurch {
+  width: 100%;
+  max-width: 900px;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Section holding pastor + text */
+.sectionForChurchAndPastor {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  width: 100%;
+  max-width: 1000px;
+  flex-wrap: wrap; /* allows stacking on small screens */
+}
+
+/* Left side with pastor image */
+.leftside {
+  flex: 1 1 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.imgforthePastor {
+  width: 30em;
+  /* max-width: 280px; */
+  height: 20em;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* Right side with text */
+.rightside {
+  flex: 2 1 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.rightside h1 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #222;
+}
+
+.textforthePaster,
+.rightside p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #444;
+  text-align: justify;
+}
+
+/* ===== Responsive Styling ===== */
+@media (max-width: 768px) {
+  .sectionForChurchAndPastor {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .rightside {
+    align-items: center;
+  }
+
+  .rightside h1 {
+    font-size: 1.5rem;
+  }
+
+  .textforthePaster,
+  .rightside p {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .TheImgageFortheChurch {
+    border-radius: 8px;
+  }
+
+  .imgforthePastor {
+    max-width: 200px;
+  }
+
+  .rightside h1 {
+    font-size: 1.3rem;
+  }
+
+  .textforthePaster,
+  .rightside p {
+    font-size: 0.9rem;
+  }
+}
+.thestyle{
+    font-size: large;
+}

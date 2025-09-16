@@ -1,0 +1,162 @@
+/* Navbar.css */
+
+/* General Navbar */
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ECF0F1; /* light gray */
+  width: 100% !important;
+  padding: 0.5em 2em;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  
+  position: fixed;   /* make it fixed */
+  top: 0;            /* stick to the top */
+  left: 0;           /* align to left */
+  z-index: 1000;     /* keep above content */
+}
+
+
+nav .logo img {
+  height: 60px; /* adjust logo size */
+  width: auto;
+  border-radius: 5px;
+}
+
+/* Desktop Menu */
+.nav-links {
+  display: flex;
+  gap: 25px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li a {
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: color 0.3s;
+}
+
+.nav-links li a:hover {
+  color: #3498DB; /* hover effect */
+}
+
+.signin-btn {
+  padding: 0.3em 1em;
+  background-color: #3498DB;
+  border: none;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.3s;
+  margin-top: 2px;
+}
+
+.signin-btn:hover {
+  background-color: #2980B9;
+}
+
+/* Mobile Menu Button */
+.menu-btn {
+  display: none;
+  cursor: pointer;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -250px; /* hidden by default */
+  width: 250px;
+  height: 100%;
+  background-color: #ECF0F1;
+  box-shadow: -4px 0 6px rgba(0,0,0,0.1);
+  padding: 2em 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+  transition: right 0.3s ease;
+  z-index: 1100;
+  border: 1px solid black;
+}
+
+.sidebar.open {
+  right: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin-top: -20px;
+  /* border: 1px solid black; */
+}
+
+.sidebar ul li a, .sidebar .signin-btn {
+  display: block;
+  font-size: 1.2rem;
+  color: #2C3E50;
+  font-weight: 600;
+  margin-bottom: .5em;
+  text-decoration: none;
+}
+.sidebar ul li a:hover, .sidebar .signin-btn:hover {
+  color: #3498DB;
+}
+
+/* Overlay for mobile sidebar */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.3);
+  z-index: 1050;
+}
+
+/* Responsive */
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  nav {
+    padding: 0.5em 1em; /* Reduced padding for mobile */
+  }
+
+  .nav-links {
+    display: none; /* hide desktop menu */
+  }
+
+  .menu-btn {
+    display: block;
+  }
+
+  /* Sidebar close button */
+  .sidebar .close-btn {
+    align-self: flex-end;
+    cursor: pointer;
+    margin-bottom: 1em;
+  }
+
+  .sidebar .close-btn svg {
+    width: 25px;
+    height: 25px;
+  }
+}
+.mobile-btn{
+  margin-top: 2px;
+  width: 100%;
+  padding: 0.2em 1em;
+}
+.finalstyle{
+  width: 100%;
+  border-radius: 23px;
+  border: 1px solid black;
+  /* background-color: rgb(46, 156, 70); */
+  align-items: center;
+  text-align: center;
+  margin-bottom: 13px;
+  /* background-color: rgba(245, 245, 245, 0.362); */
+}
