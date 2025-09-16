@@ -1,7 +1,7 @@
 // src/Components/NavBar/NavBar.jsx
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import './Navbar.css'
+import './NavBar.css'
 import { supabase } from '../../supabaseClient' // adjust path if needed
 
 const NavBar = ({ user, setUser }) => {
