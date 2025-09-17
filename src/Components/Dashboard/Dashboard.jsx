@@ -36,14 +36,18 @@ const fetchEvents = async () => {
     return
   }
 
-  // Map over events to attach public URL from stored image_path
+  if (!data) return
+
   const eventsWithUrls = data.map((event) => ({
     ...event,
-    image_url: supabase.storage.from('event-images').getPublicUrl(event.image_path).publicUrl
+    image_url: event.image_path
+      ? supabase.storage.from('event-images').getPublicUrl(event.image_path).publicUrl
+      : "https://placehold.co/120x120?text=No+Image"
   }))
 
   setEvents(eventsWithUrls)
 }
+
 
   const handleImageClick = () => fileInputRef.current.click()
   const resetEventForm = () => {
