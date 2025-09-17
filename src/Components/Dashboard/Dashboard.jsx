@@ -50,39 +50,48 @@ const Dashboard = () => {
     fileInputRef.current.value = null
   }
 
-  const handleSaveEvent = async () => {
-    if (!eventFile || !eventDescription) {
-      alert('⚠️ Please select an image and add a description.')
-      return
-    }
-
-    setLoading(true)
-    try {
-      const fileName = `${Date.now()}-${eventFile.name}`
-      const { error: uploadError } = await supabase.storage
-        .from('event-images')
-        .upload(fileName, eventFile)
-      if (uploadError) throw uploadError
-
-      const { data: publicUrl } = supabase.storage
-        .from('event-images')
-        .getPublicUrl(fileName)
-
-      const { data, error: insertError } = await supabase
-        .from('events')
-        .insert([{ image_url: publicUrl.publicUrl, description: eventDescription }])
-        .select()
-      if (insertError) throw insertError
-
-      setEvents([data[0], ...events])
-      resetEventForm()
-    } catch (err) {
-      console.error(err)
-      alert('❌ Failed to save event: ' + err.message)
-    } finally {
-      setLoading(false)
-    }
+ const handleSaveEvent = async () => {
+  if (!eventFile || !eventDescription) {
+    alert('⚠️ Please select an image and add a description.')
+    return
   }
+
+  setLoading(true)
+  try {
+    // 1. Generate a unique file name
+    const fileName = `${Date.now()}-${eventFile.name}`
+
+    // 2. Upload file to Supabase storage
+    const { error: uploadError } = await supabase.storage
+      .from('event-images')
+      .upload(fileName, eventFile)
+
+    if (uploadError) throw uploadError
+
+    // 3. Insert event record in DB (store only file name)
+    const { data, error: insertError } = await supabase
+      .from('events')
+      .insert([{ image_path: fileName, description: eventDescription }])
+      .select()
+
+    if (insertError) throw insertError
+
+    // 4. Dynamically generate public URL for immediate display
+    const newEvent = {
+      ...data[0],
+      image_url: supabase.storage.from('event-images').getPublicUrl(fileName).publicUrl
+    }
+
+    setEvents([newEvent, ...events])
+    resetEventForm()
+  } catch (err) {
+    console.error(err)
+    alert('❌ Failed to save event: ' + err.message)
+  } finally {
+    setLoading(false)
+  }
+}
+
 
   const handleDeleteEvent = async (id) => {
     if (!window.confirm('Are you sure you want to delete this event?')) return
