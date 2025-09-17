@@ -206,6 +206,13 @@ const fetchEvents = async () => {
     if (error) alert('❌ Update failed: ' + error.message)
     else fetchAnnouncements()
   }
+const handleImageChange = (e) => {
+  const file = e.target.files[0]
+  if (file) {
+    setEventFile(file)
+    setSelectedImage(URL.createObjectURL(file)) // show preview image immediately
+  }
+}
 
   return (
     <div className="dashboard-wrapper">
