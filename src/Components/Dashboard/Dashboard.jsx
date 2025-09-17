@@ -78,7 +78,7 @@ const fetchEvents = async () => {
     // 3. Insert event record in DB (store only file name)
     const { data, error: insertError } = await supabase
       .from('events')
-      .insert([{ image_path: fileName, description: eventDescription }])
+      .insert([{ image_url: fileName, description: eventDescription }])
       .select()
 
     if (insertError) throw insertError
