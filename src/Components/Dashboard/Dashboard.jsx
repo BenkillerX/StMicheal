@@ -26,23 +26,16 @@ const Dashboard = () => {
 
   // ======== Events functions ========
 const fetchEvents = async () => {
-  const { data, error } = await supabase
-    .from('events')
-    .select('*')
-    .order('created_at', { ascending: false })
+  const { data, error } = await supabase.from('events').select('*').order('created_at', { ascending: false })
 
   if (error) {
     console.error(error)
     return
   }
 
-  if (!data) return
-
-  const eventsWithUrls = data.map((event) => ({
+  const eventsWithUrls = data.map(event => ({
     ...event,
-    image_url: event.image_path
-      ? supabase.storage.from('event-images').getPublicUrl(event.image_path).publicUrl
-      : "https://placehold.co/120x120?text=No+Image"
+    image_url: supabase.storage.from('event-images').getPublicUrl(event.image_url).publicUrl
   }))
 
   setEvents(eventsWithUrls)
