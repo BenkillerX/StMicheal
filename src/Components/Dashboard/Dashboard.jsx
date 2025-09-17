@@ -25,22 +25,25 @@ const Dashboard = () => {
   }, [])
 
   // ======== Events functions ========
-  const fetchEvents = async () => {
-    const { data, error } = await supabase
-      .from('events')
-      .select('*')
-      .order('created_at', { ascending: false })
-    if (error) console.error(error)
-    else setEvents(data)
+const fetchEvents = async () => {
+  const { data, error } = await supabase
+    .from('events')
+    .select('*')
+    .order('created_at', { ascending: false })
+
+  if (error) {
+    console.error(error)
+    return
   }
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0]
-    if (file) {
-      setEventFile(file)
-      setSelectedImage(URL.createObjectURL(file))
-    }
-  }
+  // Map over events to attach public URL from stored image_path
+  const eventsWithUrls = data.map((event) => ({
+    ...event,
+    image_url: supabase.storage.from('event-images').getPublicUrl(event.image_path).publicUrl
+  }))
+
+  setEvents(eventsWithUrls)
+}
 
   const handleImageClick = () => fileInputRef.current.click()
   const resetEventForm = () => {
