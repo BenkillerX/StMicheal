@@ -53,7 +53,7 @@ const Event = () => {
           ))}
         </div>
       ) : (
-        <p>No events available.</p>
+        <p>Coming Soon.</p>
       )}
     </div>
   )

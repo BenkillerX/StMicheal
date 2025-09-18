@@ -18,30 +18,25 @@ const Login = ({ setUser }) => {
     setLoading(true)
 
     try {
-      // Try normal Supabase sign in
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
       })
 
       if (error) {
-        // If Supabase sign-in fails but credentials match the admin override,
-        // allow admin access (we create a local admin object so UI behaves normally)
         if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
           setUser({ email: ADMIN_EMAIL, id: 'local-admin' })
           setLoading(false)
           navigate('/dash')
           return
         }
-        // otherwise throw
+
         throw error
       }
 
-      // Success: set user from Supabase response (data.user)
+
       const user = data.user ?? null
       setUser(user)
-
-      // If admin account, go to dashboard, else go home
       if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
         navigate('/dash')
       } else {

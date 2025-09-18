@@ -11,7 +11,7 @@ const Intros = () => {
             <img src="/test1.jpg" alt="" className='imgforthePastor'/>
           </div>
           <div className="rightside">
-            <h1>Our Parish Priset</h1>
+            <h1>Our Parish Priest</h1>
             <p className='textforthePaster'>
               Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi rem deleniti quas placeat, vel corporis illum nostrum fugiat atque nobis dicta voluptatem commodi sapiente! Beatae hic magnam nam voluptates aut amet nulla non. Cum illo consectetur magni quasi velit quibusdam.
             </p>
